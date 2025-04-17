@@ -1,5 +1,6 @@
 
 import streamlit as st
+import json
 
 st.title("Generátor vazeb objektů")
 
@@ -20,16 +21,19 @@ to_object_type_key = [item.strip() for item in to_object_type_raw.split(",") if 
 
 # Výpis generovaných vazeb
 
-
+relations = []
 def relace_maker ():
     for to_key in to_object_type_key:
         for from_key in from_object_type_key:
             relation = {
                 "fromObjectTypeKey": f"{from_application}#{from_key}",
                 "toObjectTypeKey": f"{to_application}#{to_key}",
-                "relationTypeKey": relation_type_key
+                "relationTypeKey": f"{relation_type_key}"
             }
-            st.json(relation)
+            relations.append(relation)
+            
+    st.markdown("Vygenerované relace (kopírovatelné JSON pole):")
+    st.code(json.dumps(relations, indent=2), language="json")
 
 
 if st.button("Vytvoř relace"):
@@ -40,6 +44,8 @@ if st.button("Vytvoř relace"):
         or '"' in from_object_type_raw or '"' in to_object_type_raw:
         st.error('Pole nesmí obsahovat uvozovky (").')
 
+
     else:
         relace_maker()
+       
    
