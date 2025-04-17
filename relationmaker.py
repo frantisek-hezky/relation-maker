@@ -1,27 +1,45 @@
+
 import streamlit as st
 
-# Definice dat
-from_application = st.text_input ("Zadej jméno aplikace, ze které chceš vytvořit from vazby.")
-from_object_type_key = st.text_input ("Zadej jméno objektových typů, ze kterých chceš vytvořit vazby.")
-
-to_application = st.text_input ("Zadej jméno aplikace, do které chceš vytvořit to vazby.")
-to_object_type_key = st.text_input ("Zadej jméno objektových typů, do kterých chceš vytvořit vazby.")
-
-relation_type_key = st.text_input ("Zadej klíče relace.")
-
-# Titulek aplikace
 st.title("Generátor vazeb objektů")
 
+# Definice dat
+from_application = st.text_input ("Zadej jméno aplikace, ze které chceš vytvořit from vazby.", placeholder="core_business_glossary")
+from_object_type_raw = st.text_input ("Zadej jméno objektových typů, ze kterých chceš vytvořit vazby.", placeholder="business_term, business_indicator, business_rule")
+
+to_application = st.text_input ("Zadej jméno aplikace, do které chceš vytvořit to vazby.", placeholder="core_snowflake")
+to_object_type_raw = st.text_input ("Zadej jméno objektových typů, do kterých chceš vytvořit vazby.", placeholder="database, table, column")
+
+relation_type_key = st.text_input ("Zadej klíče relace.", placeholder="core#related")
+
+# Titulek aplikace
+
+
+from_object_type_key = [item.strip() for item in from_object_type_raw.split(",") if item.strip()]
+to_object_type_key = [item.strip() for item in to_object_type_raw.split(",") if item.strip()]
+
 # Výpis generovaných vazeb
+
 
 def relace_maker ():
     for to_key in to_object_type_key:
         for from_key in from_object_type_key:
             relation = {
-                "fromObjectTypeKey": f"{from_application[0]}#{from_key}",
-                "toObjectTypeKey": f"{to_application[0]}#{to_key}",
+                "fromObjectTypeKey": f"{from_application}#{from_key}",
+                "toObjectTypeKey": f"{to_application}#{to_key}",
                 "relationTypeKey": relation_type_key
             }
             st.json(relation)
+
+
 if st.button("Vytvoř relace"):
-    relace_maker()
+    if not all([from_application,from_object_type_raw,to_application,to_object_type_raw,relation_type_key ]):
+        st.error("Vyplň prosím všechna pole před vytvořením relací.")
+
+    elif '"' in from_application or '"' in to_application or '"' in relation_type_key \
+        or '"' in from_object_type_raw or '"' in to_object_type_raw:
+        st.error('Pole nesmí obsahovat uvozovky (").')
+
+    else:
+        relace_maker()
+   
