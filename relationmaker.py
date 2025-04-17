@@ -11,7 +11,7 @@ from_object_type_raw = st.text_input ("Zadej jméno objektových typů, ze kter�
 to_application = st.text_input ("Zadej jméno aplikace, do které chceš vytvořit 'to' vazby.", placeholder="core_snowflake")
 to_object_type_raw = st.text_input ("Zadej jméno objektových typů, do kterých chceš vytvořit vazby.", placeholder="database, table, column")
 
-relation_type_key = st.text_input ("Zadej klíče relace.", placeholder="core#related")
+relation_type_key = st.text_input ("Zadej klíč relace.", placeholder="core#related")
 
 # Titulek aplikace
 
