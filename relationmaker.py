@@ -5,10 +5,10 @@ import json
 st.title("Generátor vazeb objektů")
 
 # Definice dat
-from_application = st.text_input ("Zadej jméno aplikace, ze které chceš vytvořit 'from' vazby.", placeholder="core_business_glossary")
+from_application = st.text_input ("Zadej jméno jedné aplikace, ze které chceš vytvořit 'from' vazby.", placeholder="core_business_glossary")
 from_object_type_raw = st.text_input ("Zadej jméno objektových typů, ze kterých chceš vytvořit vazby.", placeholder="business_term, business_indicator, business_rule")
 
-to_application = st.text_input ("Zadej jméno aplikace, do které chceš vytvořit 'to' vazby.", placeholder="core_snowflake")
+to_application = st.text_input ("Zadej jméno jedné aplikace, do které chceš vytvořit 'to' vazby.", placeholder="core_snowflake")
 to_object_type_raw = st.text_input ("Zadej jméno objektových typů, do kterých chceš vytvořit vazby.", placeholder="database, table, column")
 
 relation_type_key = st.text_input ("Zadej klíč relace.", placeholder="core#related")
