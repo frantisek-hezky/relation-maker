@@ -76,7 +76,7 @@ body {
 """
 
 aktualni_cas = datetime.now()
-aktualni_hodina = aktualni_cas.hour()
+aktualni_hodina = aktualni_cas.hour
 
 if (aktualni_hodina >19 or aktualni_hodina<10):
     st.markdown(dark, unsafe_allow_html=True)
