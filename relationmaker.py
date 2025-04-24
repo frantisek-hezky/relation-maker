@@ -44,8 +44,11 @@ if st.button("Vytvoř relace"):
         or '"' in from_object_type_raw or '"' in to_object_type_raw:
         st.error('Pole nesmí obsahovat uvozovky (").')
             
-    elif len(from_application) > 1:
-        st.error ('Pole "from_application" může obsahovat pouze jednu hodnotu')
+    elif ',' in from_application:
+        st.error ('Pole "from_application" může obsahovat pouze jednu hodnotu.')
+
+    elif ',' in to_application:
+        st.error ('Pole "to_application" může obsahovat pouze jednu hodnotu.')
 
     else:
         relace_maker()
