@@ -50,6 +50,9 @@ if st.button("Vytvoř relace"):
     elif ',' in to_application:
         st.error ('Pole "to_application" může obsahovat pouze jednu hodnotu.')
 
+    elif ',' in relation_type_key:
+        st.error ('Pole "relation" může obsahovat pouze jednu hodnotu.')
+
     else:
         relace_maker()
        
