@@ -56,4 +56,29 @@ if st.button("Vytvoř relace"):
     else:
         relace_maker()
 
+from datetime import datetime
+light = """
+<style>
+body {
+    background-color: white;
+    color: black;
+}
+</style>
+"""
+
+dark = """
+<style>
+body {
+    background-color: #0e1117;
+    color: white;
+}
+</style>
+"""
+
+aktualni_cas = datetime.now()
+aktualni_hodina = aktualni_cas.hour()
+
+if (aktualni_hodina >19 or aktualni_hodina<10):
+    st.markdown(dark, unsafe_allow_html=True)
+
 
